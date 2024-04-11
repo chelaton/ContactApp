@@ -31,5 +31,35 @@ namespace ContactAppServices.Services
       await _contactRepository.SaveChangesAsync();
       return;
     }
+
+    public async Task EditContact(Guid userId, int id, string name, string surName, string phone, string email)
+    {
+      var contactUnedited = await GetContactByIdAsync(userId, id);
+      if (contactUnedited != null)
+      {
+        contactUnedited.Email = email;
+        contactUnedited.Name = name;
+        contactUnedited.Surname = surName;
+        contactUnedited.PhoneNumber = phone;
+
+        _contactRepository.EditContact(contactUnedited);
+        await _contactRepository.SaveChangesAsync();
+      }
+    }
+    
+    public async Task DeleteContact(Guid userId, int id)
+    {
+      var contactToDelete = await GetContactByIdAsync(userId, id);
+      if (contactToDelete != null)
+      {
+        _contactRepository.DeleteContact(contactToDelete);
+        await _contactRepository.SaveChangesAsync();
+      }
+    }
+
+    public async Task<bool> ContactExist(Guid userId, int id)
+    {
+      return await _contactRepository.ContactExists(userId, id);
+    }
   }
 }

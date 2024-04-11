@@ -1,5 +1,6 @@
 ﻿using ContactAppData.Interfaces;
 using ContactAppData.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace ContactAppData.Repository
 {
@@ -20,6 +21,21 @@ namespace ContactAppData.Repository
     public async Task AddContactAsync(Contact contact)
     {
       await _context.Contacts.AddAsync(contact);
+    }
+    
+    public void EditContact(Contact contact)
+    {
+      _context.Contacts.Update(contact);
+    }
+
+    public async Task<bool> ContactExists(Guid userId, int id)
+    {
+      return await _context.Contacts.AnyAsync(e => e.Id == id && e.UserId==userId);
+    }
+
+    public void DeleteContact(Contact contact)
+    {
+      _context.Contacts.Remove(contact);
     }
 
     public async Task SaveChangesAsync()
