@@ -1,14 +1,10 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace ContactApp.Models
+namespace ContactApp.Models.ViewModels
 {
-  public class Contact
+  public class ContactDelete
   {
-    [Key]
     public int Id { get; set; }
-
-    public string UserId { get; set; }
-
     [Required]
     [MaxLength(20)]
     public string Name { get; set; }
@@ -23,7 +19,5 @@ namespace ContactApp.Models
     [EmailAddress(ErrorMessage = "Invalid Email Address")]
     [MaxLength(70)]
     public string? Email { get; set; }
-
-    //je mozno rozsirovat napr o adresu atd.
   }
 }

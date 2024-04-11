@@ -1,8 +1,8 @@
-﻿using ContactApp.Models;
+﻿using ContactAppData.Models;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
-namespace ContactApp.Data
+namespace ContactAppData
 {
   public class ApplicationDbContext : IdentityDbContext
   {
